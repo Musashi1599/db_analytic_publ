@@ -51,7 +51,7 @@ def create_buttons(*args):
     return markup
 
 def sro_send(mess_list, message, name):
-    mess = 'Падение по сумме за месяц: \n'+'\n'.join(mess_list[0])+'\n\n'+'Уход на другие ЭТП:'+'\n'+'\n'.join(mess_list[1])
+    mess = 'Падение за месяц: \n'+'\n'.join(mess_list[0])+'\n\n'+'Уход на другие ЭТП:'+'\n'+'\n'.join(mess_list[1])
     bot.send_message(message.chat.id, mess)
     sro_path = os.getcwd()+'/report.xlsx'
     with open(f'{sro_path}',"rb") as file:
@@ -73,26 +73,46 @@ def text(message):
     match message.text:
         case 'Тенденция по участникам СРО':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            btn0 = types.KeyboardButton("Авангард")
             btn1 = types.KeyboardButton("Альянс")
             btn2 = types.KeyboardButton("Альянс управляющих")
             btn3 = types.KeyboardButton("ВОЗРОЖДЕНИЕ")
-            btn4 = types.KeyboardButton("ДЕЛО")
-            btn5 = types.KeyboardButton("ДМСО")
-            btn6 = types.KeyboardButton("Достояние")
-            btn7 = types.KeyboardButton("Единство")
-            btn8 = types.KeyboardButton("МСО ПАУ")
-            btn9 = types.KeyboardButton("МЦАУ")
-            btn10 = types.KeyboardButton("НацАрбитр")
-            btn11 = types.KeyboardButton("Паритет")
-            btn12 = types.KeyboardButton("ПРАВОСОЗНАНИЕ")
-            btn13 = types.KeyboardButton("САМРО")
-            btn14 = types.KeyboardButton("СИРИУС")
-            btn15 = types.KeyboardButton("СРО ПАУ ЦФО")
-            btn16 = types.KeyboardButton("СЦЭАУ")   
-            btn17 = types.KeyboardButton("ЦФОП АПК")
-            btn18 = types.KeyboardButton("Южный Урал")
+            btn4 = types.KeyboardButton("Гарант")
+            btn5 = types.KeyboardButton("ДЕЛО")
+            btn6 = types.KeyboardButton("ДМСО")
+            btn7 = types.KeyboardButton("Достояние")
+            btn8 = types.KeyboardButton("Единство")
+            btn9 = types.KeyboardButton("Континент")
+            btn10 = types.KeyboardButton("Лидер")
+            btn11 = types.KeyboardButton("Лига")
+            btn12 = types.KeyboardButton("Мск СОПАУ")
+            btn13 = types.KeyboardButton("МСО ПАУ")
+            btn14 = types.KeyboardButton("МЦАУ")
+            btn15 = types.KeyboardButton("НацАрбитр")
+            btn16 = types.KeyboardButton("Паритет")
+            btn17 = types.KeyboardButton("ПРАВОСОЗНАНИЕ")
+            btn18 = types.KeyboardButton("Развитие")
+            btn19 = types.KeyboardButton("РСОПАУ")
+            btn20 = types.KeyboardButton("Стратегия")
+            btn21 = types.KeyboardButton("СоБР")
+            btn22 = types.KeyboardButton("МЦПУ")
+            btn23 = types.KeyboardButton("СМиАУ")
+            btn24 = types.KeyboardButton("СРО АУ СЗ")
+            btn25 = types.KeyboardButton("Синергия")
+            btn26 = types.KeyboardButton("Содействие")
+            btn27 = types.KeyboardButton("ААУ Содружество")
+            btn28 = types.KeyboardButton("МСК ПАУ Содружество")
+            btn29 = types.KeyboardButton("САМРО")
+            btn30 = types.KeyboardButton("СИРИУС")
+            btn31 = types.KeyboardButton("СРО ПАУ ЦФО")
+            btn32 = types.KeyboardButton("СЦЭАУ")   
+            btn33 = types.KeyboardButton("ЦФОП АПК")
+            btn34 = types.KeyboardButton("ЦААУ")
+            btn35 = types.KeyboardButton("Южный Урал")
+            btn36 = types.KeyboardButton("Эгида")
             
-            markup.add(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15 ,btn16, btn17, btn18)
+            
+            markup.add(btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10, btn11, btn12, btn13, btn14, btn15, btn16, btn17, btn18, btn19, btn20, btn21, btn22, btn23, btn24, btn25, btn26, btn27, btn28, btn29, btn30, btn31, btn32, btn33, btn34, btn35, btn36)
     
             bot.send_message(message.chat.id, "Выберите СРО:", reply_markup=markup)
 
@@ -196,6 +216,97 @@ def text(message):
             name = 'СИРИУС'
             message_list = pars.tb.sro_au_info(pars.tb, 'Ассоциация арбитражных управляющих "СИРИУС"')
             sro_send(message_list, message, name)
+
+        case 'Авангард':
+            name = 'СИРИУС'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Союз арбитражных управляющих "Авангард"')
+            sro_send(message_list, message, name)
+
+        case 'Гарант':
+            name = 'Гарант'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Ассоциация профессиональных арбитражных управляющих "Гарант"')
+            sro_send(message_list, message, name)
+
+        case 'Лидер':
+            name = 'Лидер'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Ассоциация саморегулируемая организация "Объединение арбитражных управляющих "Лидер"')
+            sro_send(message_list, message, name)
+
+        case 'Лига':
+            name = 'Лига'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Ассоциация "Саморегулируемая организация арбитражных управляющих "Лига"')
+            sro_send(message_list, message, name)
+
+        case 'Мск СОПАУ':
+            name = 'Мск СОПАУ'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Ассоциация МСОПАУ - Ассоциация "Московская саморегулируемая организация профессиональных арбитражных управляющих"')
+            sro_send(message_list, message, name)
+
+        case 'Развитие':
+            name = 'Развитие'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Некоммерческое партнерство Саморегулируемая организация арбитражных управляющих "РАЗВИТИЕ"')
+            sro_send(message_list, message, name)
+
+        case 'РСОПАУ':
+            name = 'РСОПАУ'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Ассоциация "Региональная саморегулируемая организация профессиональных арбитражных управляющих"')
+            sro_send(message_list, message, name)
+
+        case 'Стратегия':
+            name = 'Стратегия'
+            message_list = pars.tb.sro_au_info(pars.tb, 'СОЮЗ «САМОРЕГУЛИРУЕМАЯ ОРГАНИЗАЦИЯ АРБИТРАЖНЫХ УПРАВЛЯЮЩИХ «СТРАТЕГИЯ»')
+            sro_send(message_list, message, name)
+
+        case 'СоБР':
+            name = 'СоБР'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Ассоциация арбитражных управляющих "Современные банкротные решения"')
+            sro_send(message_list, message, name)
+
+        case 'МЦПУ':
+            name = 'МЦПУ'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Ассоциация саморегулируемая организация арбитражных управляющих "Межрегиональный центр экспертов и профессиональных управляющих"')
+            sro_send(message_list, message, name)
+
+        case 'СМиАУ':
+            name = 'СМиАУ'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Саморегулируемая организация "Союз менеджеров и арбитражных управляющих"')
+            sro_send(message_list, message, name)
+
+        case 'СРО АУ СЗ':
+            name = 'СРО АУ СЗ'
+            message_list = pars.tb.sro_au_info(pars.tb, 'СОЮЗ "САМОРЕГУЛИРУЕМАЯ ОРГАНИЗАЦИЯ АРБИТРАЖНЫХ УПРАВЛЯЮЩИХ СЕВЕРО-ЗАПАДА"')
+            sro_send(message_list, message, name)
+
+        case 'Синергия':
+            name = 'Синергия'
+            message_list = pars.tb.sro_au_info(pars.tb, 'СРО ААУ "Синергия" - Саморегулируемая организация ассоциация арбитражных управляющих "Синергия"')
+            sro_send(message_list, message, name)
+
+        case 'Содействие':
+            name = 'Содействие'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Ассоциация МСРО "Содействие" - Ассоциация "Межрегиональная саморегулируемая организация арбитражных управляющих "Содействие"')
+            sro_send(message_list, message, name)
+
+        case 'ААУ Содружество':
+            name = 'ААУ Содружество'
+            message_list = pars.tb.sro_au_info(pars.tb, 'ААУ "Содружество" - Ассоциация Арбитражных Управляющих "Содружество"')
+            sro_send(message_list, message, name)
+
+        case 'МСК ПАУ Содружество':
+            name = 'МСК ПАУ Содружество'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Ассоциация "Межрегиональная Северо-Кавказская саморегулируемая организация профессиональных арбитражных управляющих "Содружество"')
+            sro_send(message_list, message, name)
+
+        case 'ЦААУ':
+            name = 'ЦААУ'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Ассоциация арбитражных управляющих саморегулируемая организация "Центральное агентство арбитражных управляющих"')
+            sro_send(message_list, message, name)
+
+        case 'Эгида':
+            name = 'Эгида'
+            message_list = pars.tb.sro_au_info(pars.tb, 'Ассоциация саморегулируемая организация арбитражных управляющих "Эгида"')
+            sro_send(message_list, message, name)
+
 
         case "Тенденция по всем АУ за месяц":
             mess_list = pars.tb.all_au_for_month(pars.tb)

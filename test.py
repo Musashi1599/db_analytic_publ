@@ -21,4 +21,7 @@ sro_names = [
 ]
 
 result = ", ".join(sro_names)
-print(result)
+
+
+list = [f'btn{i},' for i in range(38)]
+print(*list)
