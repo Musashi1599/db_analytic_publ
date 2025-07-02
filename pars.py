@@ -352,12 +352,16 @@ class Table_parser:
                     
 
             if len(etp_none_cdt_now)>0 and len(etp_cdt_last) > 0 and len(etp_cdt_now) > 0:
-                ratio_last = sum(publish_cdt_last) / (sum(publish_cdt_last)+sum(publish_all_last)) if sum(publish_all_last) != 0 else 0
-                ratio_now = sum(publish_cdt_now) / (sum(publish_cdt_now)+sum(publish_all_now)) if sum(publish_all_now) != 0 else 0
+                sum1 = sum(publish_cdt_last)+len(etp_none_cdt_last)
+                sum2 = sum(publish_cdt_now)+len(etp_none_cdt_now)
+                ratio_last = sum(publish_cdt_last) / sum1 if sum(publish_all_last) != 0 else 0
+                ratio_now = sum(publish_cdt_now) / sum2 if sum(publish_all_now) != 0 else 0
+                a = f'Прошлый месяц - ЦДТ - {sum(publish_cdt_last)}, всего - {sum1}, процент ЦДТ - {str(ratio_last*100)[0:5]}%'
+                b = f'Отчетный месяц - ЦДТ - {sum(publish_cdt_now)}, всего - {sum2}, процент ЦДТ - {str(ratio_now*100)[0:5]}%'
                 if ratio_last > ratio_now:
                     message_list[0].append(org_data[0][0]+'\n'+ record[4])
-                    message_list[0].append(f'Прошлый месяц - ЦДТ - {publish_cdt_last}, всего - {publish_all_last}, процент ЦДТ - {ratio_last}%')
-                    message_list[0].append(f'Отчетный месяц - ЦДТ -{publish_cdt_now}, всего - {publish_all_now}, процент цдт - {ratio_now}%')
+                    message_list[0].append(a)
+                    message_list[0].append(b)
                     
             if len(date_cdt_last) > 0 and len(date_cdt_now) == 0 and len(date_all_now) > 0:
                 message_list[1].append(org_data[0][0]+'\n'+record[4]+':')

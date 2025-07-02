@@ -73,6 +73,13 @@ def text(message):
     match message.text:
         case 'Тенденция по участникам СРО':
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            btn1 = types.KeyboardButton("С аккредитацией")
+            btn2 = types.KeyboardButton("Без аккредитации")
+            markup.add(btn1, btn2)
+            bot.send_message(message.chat.id, "Наличие аккредитации у ЦДТ в СРО:", reply_markup=markup)
+
+        case 'С аккредитацией':
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             btn0 = types.KeyboardButton("Авангард")
             btn1 = types.KeyboardButton("Альянс")
             btn2 = types.KeyboardButton("Альянс управляющих")
@@ -314,5 +321,8 @@ def text(message):
             mess = 'Падение по сумме за месяц: \n'+'\n'.join(mess_list[0])+'\n\n'+'Уход на другие ЭТП:'+'\n'+'\n'.join(mess_list[1])
             send_long_message(bot, message.chat.id, mess)
 
-    
+        case "Без аккредитации":
+            pass
+
+
 bot_start()
