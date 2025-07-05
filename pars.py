@@ -56,6 +56,7 @@ class Table_parser:
                     insert_list.append(None)  # NULL в БД
                 elif type(value) == str:
                     result = value.replace('  ', ' ')
+                    result = result.lower()
                     insert_list.append(result)
                 else:
                     insert_list.append(value)

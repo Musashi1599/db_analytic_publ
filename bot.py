@@ -27,18 +27,6 @@ def send_mess(chat_id, message, markup) -> None:
     last_message_id = mess.message_id
     last_message_text = message
 
-def send_long_message(bot, chat_id, text, max_length=4096, **kwargs):
-    """
-    Отправляет длинное сообщение, разбивая его на части
-    :param bot: объект TeleBot
-    :param chat_id: ID чата
-    :param text: текст сообщения
-    :param max_length: максимальная длина части (по умолчанию 4096)
-    :param kwargs: дополнительные параметры для send_message
-    """
-    for part in split_string(text, max_length):
-        bot.send_message(chat_id, part, **kwargs)
-
 
 def create_buttons(*args):
     markup = types.InlineKeyboardMarkup()
@@ -57,8 +45,9 @@ def create_buttons(*args):
 def start(message):
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = types.KeyboardButton("Статистика по СРО")
+    btn2 = types.KeyboardButton('Статистика по ЭТП')
     #btn2 = types.KeyboardButton("Тенденция по всем АУ за месяц") пока убрал фичу
-    markup.add(btn1)
+    markup.add(btn1, btn2)
     bot.send_message(message.chat.id, "Выберите действие:", reply_markup=markup)
 
 

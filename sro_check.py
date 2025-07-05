@@ -183,13 +183,13 @@ def sro_without_accr(month, year):
     for el in sro_massiv:
         date = el[7].replace(day=1)
         if date == current_date:
-            buffer_list = [el[5], el[1], el[6]] #СРО, ФИО, ЭТП
+            buffer_list = [el[5], el[1], el[6]] #СРО, ФИО/наименование, ЭТП
             final_list.append(buffer_list)
     
     f_list = []
 
     for el in final_list:
-        if el[0] in ['', ' ', 'Не состоит в СРО']:
+        if el[0] in ['', ' ', 'не состоит в сро']:
             f_list.append((el[1], el[2]))
         else:
             f_list.append((el[0], el[2]))
@@ -202,5 +202,22 @@ def sro_without_accr(month, year):
     f_set = set(f_list2)
     f_list = list(f_set)
     list2 = sorted(f_list, key=lambda x: x[0][0])  
-    print(*list2, sep='\n')
     
+    sro_dict = {}
+
+    # Группируем данные по СРО
+    for (sro, etp), count in list2:
+        if sro not in sro_dict:
+            sro_dict[sro] = []
+        sro_dict[sro].append((etp, count))
+
+    # Формируем вывод в нужном формате
+    result = []
+    for sro in sro_dict:  # или sorted(sro_dict) для сортировки по алфавиту
+        result.append(sro)
+        for etp, count in sro_dict[sro]:
+            result.append(f"{etp}: {count}")
+        result.append("")  # Пустая строка между СРО
+
+    res = "\n".join(result[:-1])
+    return res
